@@ -1,6 +1,9 @@
 # sohyeon-spring-cloud-msa
 Spring Cloud로 개발하는 마이크로서비스 애플리케이션(MSA) 강의 실습
 
+<br/>
+
+### 학습 정리
 |날짜|주제|학습 정리 링크|
 |------|---|---|
 |23.09.13|Microservice와 Spring Cloud 소개|[1주차 학습 정리](https://energetic-mimosa-b8e.notion.site/1-6ea81530df154f2a8fe259dfb590d62a?pvs=4)|
