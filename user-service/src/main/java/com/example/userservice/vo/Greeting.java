@@ -1,4 +1,4 @@
-package com.example.userservice.config;
+package com.example.userservice.vo;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
