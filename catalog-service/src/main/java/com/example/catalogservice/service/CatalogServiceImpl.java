@@ -12,10 +12,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 public class CatalogServiceImpl implements CatalogService {
-	private final CatalogRepository repository;
+	private final CatalogRepository catalogRepository;
 
 	@Override
 	public Iterable<CatalogEntity> getAllCatalogs() {
-		return repository.findAll();
+		return catalogRepository.findAll();
 	}
 }

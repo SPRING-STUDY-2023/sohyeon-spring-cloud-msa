@@ -1,4 +1,4 @@
-package com.example.catalogservice.vo;
+package com.example.catalogservice.dto;
 
 import java.io.Serializable;
 

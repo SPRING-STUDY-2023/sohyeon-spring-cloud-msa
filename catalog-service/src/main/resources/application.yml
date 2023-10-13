@@ -13,16 +13,20 @@ spring:
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:testdb
-    username: sa
+#    username: sa
   jpa:
     hibernate:
       ddl-auto: create-drop
     show-sql: true
-    generate-ddl: true
-    defer-datasource-initialization: true
+    generate-ddl: true # 데이터 초기 세팅
+    defer-datasource-initialization: true # sql 실행 전 테이블 세팅 먼저
 
 eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
   client:
+    register-with-eureka: true
+    fetch-registry: true
     service-url:
       defaultZone: http://localhost:8761/eureka
 
