@@ -16,6 +16,7 @@ import com.example.userservice.vo.Greeting;
 import com.example.userservice.vo.RequestUser;
 import com.example.userservice.vo.ResponseUser;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -26,9 +27,9 @@ public class UserController {
 	private final Greeting greeting;
 	private final UserService userService;
 
-	@GetMapping("/health_check")
-	public String status() {
-		return "It's working in User Service.";
+	@GetMapping("/user-service/health_check")
+	public String status(HttpServletRequest request) {
+		return String.format("It's working in User Service on Port %s", request.getServerPort());
 	}
 
 	@GetMapping("/welcome")

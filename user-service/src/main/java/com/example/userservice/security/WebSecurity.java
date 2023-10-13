@@ -19,6 +19,7 @@ public class WebSecurity {
 			.authorizeHttpRequests(authorizeRequests ->
 				authorizeRequests
 					.requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll()
+					.requestMatchers(new AntPathRequestMatcher("/user-service/health_check/**")).permitAll()
 					.requestMatchers(new AntPathRequestMatcher("/users/**")).permitAll()
 			)
 			.headers(header -> header.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
