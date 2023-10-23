@@ -20,12 +20,12 @@ import reactor.core.publisher.Mono;
 public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<AuthorizationHeaderFilter.Config> {
 	Environment env;
 
-	public static class Config {
-	}
-
 	public AuthorizationHeaderFilter(Environment env) {
 		super(Config.class);
 		this.env = env;
+	}
+
+	public static class Config {
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
 			subject = Jwts.parserBuilder()
 				.setSigningKey(env.getProperty("token.secret"))
 				.build()
-				.parseClaimsJwt(jwt).getBody()
+				.parseClaimsJws(jwt).getBody()
 				.getSubject();
 		} catch (Exception ex) {
 			returnValue = false;
