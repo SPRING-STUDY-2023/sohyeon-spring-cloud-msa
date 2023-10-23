@@ -4,6 +4,7 @@ import static org.springframework.boot.autoconfigure.security.servlet.PathReques
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -27,6 +28,7 @@ public class WebSecurity {
 	private final UserService userService;
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 	private final ObjectPostProcessor<Object> objectPostProcessor;
+	private final Environment env;
 
 	@Bean
 	protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -52,9 +54,10 @@ public class WebSecurity {
 	}
 
 	private AuthenticationFilter getAuthenticationFilter() throws Exception {
-		AuthenticationFilter authenticationFilter = new AuthenticationFilter();
-		AuthenticationManagerBuilder builder = new AuthenticationManagerBuilder(objectPostProcessor);
-		authenticationFilter.setAuthenticationManager(authenticationManager(builder));
-		return authenticationFilter;
+		return new AuthenticationFilter(
+			authenticationManager(new AuthenticationManagerBuilder(objectPostProcessor)),
+			userService,
+			env
+		);
 	}
 }
