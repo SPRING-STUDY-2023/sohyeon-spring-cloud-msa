@@ -1,7 +1,11 @@
 package com.example.userservice.security;
 
+import static java.util.Objects.*;
+
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Objects;
 
 import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,6 +20,8 @@ import com.example.userservice.service.UserService;
 import com.example.userservice.vo.RequestLogin;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -62,6 +68,16 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 		Authentication authResult
 	) throws IOException, ServletException {
 		String userName = ((User)authResult.getPrincipal()).getUsername();
-		UserDto userDto = userService.getUserDetailByEmail(userName);
+		UserDto userDetails = userService.getUserDetailByEmail(userName);
+
+		String token = Jwts.builder()
+			.setSubject(userDetails.getUserId())
+			.setExpiration(new Date(System.currentTimeMillis() +
+				Long.parseLong(requireNonNull(env.getProperty("token.expiration_time")))))
+			.signWith(SignatureAlgorithm.HS512, env.getProperty("token.secret"))
+			.compact();
+
+		response.addHeader("token", token);
+		response.addHeader("userId", userDetails.getUserId());
 	}
 }
