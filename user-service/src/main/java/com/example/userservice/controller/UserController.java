@@ -26,9 +26,8 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/user-service/")
+@RequestMapping("/")
 public class UserController {
-
 	private final Greeting greeting;
 	private final UserService userService;
 
