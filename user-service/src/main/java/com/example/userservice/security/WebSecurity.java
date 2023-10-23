@@ -33,7 +33,7 @@ public class WebSecurity {
 	};
 
 	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+	protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		return http
 			.csrf(CsrfConfigurer::disable)
 			.authorizeHttpRequests(authorizeRequests ->
@@ -47,6 +47,8 @@ public class WebSecurity {
 			.build();
 	}
 
+	// select pwd from users where email=?
+	// db_pwd(encrypted) == input_pwd(encrypted)
 	public AuthenticationManager authenticationManager(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder);
 		return auth.build();
