@@ -11,3 +11,4 @@ Spring Cloud로 개발하는 마이크로서비스 애플리케이션(MSA) 강�
 |23.09.25|API Gateway Service, E-commerce 애플리케이션|[3~4주차 학습 정리](https://energetic-mimosa-b8e.notion.site/3-4-90b046c2f1be49aeb03bda9419e151e9?pvs=4)|
 |23.10.06|Users Microservice(1)|[5주차 학습 정리](https://energetic-mimosa-b8e.notion.site/5-422a046d823c42f5a11233573e6c2046?pvs=4)|
 |23.10.14|Catalogs and Orders Microservice|[6주차 학습 정리](https://energetic-mimosa-b8e.notion.site/6-291cf61c85734390999d9f76341b9b82?pvs=4)|
+|23.10.24|Users Microservice(2)|[7~8주차 학습 정리](https://energetic-mimosa-b8e.notion.site/7-8-e2524600e8c44fd9b937c7a0976b01c3?pvs=4)|
