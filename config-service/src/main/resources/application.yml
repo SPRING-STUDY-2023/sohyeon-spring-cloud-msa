@@ -4,8 +4,16 @@ server:
 spring:
   application:
     name: config-server
+  profiles:
+    active: native
   cloud:
     config:
       server:
+        native:
+          search-locations: file://${user.home}/Study/MSA/native-file-repo
         git:
-          uri: file:///Users/sohyeon/Study/MSA/git-local-repo # pwd로 경로 확인 가능
+          uri: https://github.com/SPRING-STUDY-2023/sohyeon-spring-cloud-config.git
+          # private Repository 로 설정했을 경우 username, password 추가
+#          username: [your username]
+#          password: [your password]
+#          uri: file:///Users/sohyeon/Study/MSA/git-local-repo # pwd로 경로 확인 가능
