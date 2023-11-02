@@ -34,6 +34,12 @@ logging:
   level:
     com.example.userservice: DEBUG
 
-token:
-  expiration_time: 86400000 # 60 * 60 * 24 * 1000 = 1day
-  secret: testSecretKey20230327testSecretKey20230327testSecretKey20230327AgEgHeaEGragkajfAEGRGAAEERAEGEAKeyFallingInAndOut
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans
+
+#token:
+#  expiration_time: 86400000 # 60 * 60 * 24 * 1000 = 1day
+#  secret: testSecretKey20230327testSecretKey20230327testSecretKey20230327AgEgHeaEGragkajfAEGRGAAEERAEGEAKeyFallingInAndOut
