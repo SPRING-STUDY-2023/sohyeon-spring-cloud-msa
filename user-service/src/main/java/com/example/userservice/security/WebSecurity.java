@@ -37,9 +37,10 @@ public class WebSecurity {
 			.headers(header -> header.frameOptions(FrameOptionsConfig::disable))
 			.authorizeHttpRequests(authorizeRequests ->
 				authorizeRequests
-					.requestMatchers(new AntPathRequestMatcher("/users/**")).permitAll()
-					.requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
 					.requestMatchers(new AntPathRequestMatcher(toH2Console() + "/**")).permitAll()
+					// .requestMatchers(new AntPathRequestMatcher("/users/**")).permitAll()
+					.requestMatchers(new AntPathRequestMatcher("/actuator/**")).permitAll()
+					.requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
 					.requestMatchers(new IpAddressMatcher("127.0.0.1")).permitAll()
 			)
 			.addFilter(getAuthenticationFilter())
