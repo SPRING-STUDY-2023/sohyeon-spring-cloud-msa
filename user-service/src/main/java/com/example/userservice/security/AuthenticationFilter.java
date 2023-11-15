@@ -74,7 +74,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 			.setSubject(userDetails.getUserId())
 			.setExpiration(new Date(System.currentTimeMillis() +
 				Long.parseLong(requireNonNull(env.getProperty("token.expiration_time")))))
-			.signWith(SignatureAlgorithm.HS512, env.getProperty("token.secret"))
+			.signWith(SignatureAlgorithm.HS512, requireNonNull(env.getProperty("token.secret")).getBytes())
 			.compact();
 
 		response.addHeader("token", token);

@@ -1,5 +1,7 @@
 package com.example.apigatewayservice.filter;
 
+import static java.util.Objects.*;
+
 import org.apache.http.HttpHeaders;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
@@ -11,7 +13,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 
 import io.jsonwebtoken.Jwts;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
@@ -37,7 +38,7 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
 				return onError(exchange, "No Authorization Header.", HttpStatus.UNAUTHORIZED);
 			}
 
-			String authorizationHeader = request.getHeaders().get(HttpHeaders.AUTHORIZATION).get(0);
+			String authorizationHeader = requireNonNull(request.getHeaders().get(HttpHeaders.AUTHORIZATION)).get(0);
 			String jwt = authorizationHeader.replace("Bearer", "");
 
 			if (!isJwtValid(jwt)) {
@@ -55,7 +56,7 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
 
 		try {
 			subject = Jwts.parserBuilder()
-				.setSigningKey(env.getProperty("token.secret"))
+				.setSigningKey(requireNonNull(env.getProperty("token.secret")).getBytes())
 				.build()
 				.parseClaimsJws(jwt).getBody()
 				.getSubject();
