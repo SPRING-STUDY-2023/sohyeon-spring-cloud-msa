@@ -24,8 +24,11 @@ import com.example.userservice.jpa.UserEntity;
 import com.example.userservice.jpa.UserRepository;
 import com.example.userservice.vo.ResponseOrder;
 
+import feign.FeignException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -78,11 +81,24 @@ public class UserServiceImpl implements UserService {
 		// List<ResponseOrder> orders = getOrdersByRestTemplate(userId);
 
 		/* Using a feign client */
-		List<ResponseOrder> orders = orderServiceClient.getOrders(userId);
+		List<ResponseOrder> orders = getOrdersByFeignClient(userId);
 
 		userDto.setOrders(orders);
 
 		return userDto;
+	}
+
+	private List<ResponseOrder> getOrdersByFeignClient(String userId) {
+		List<ResponseOrder> orders = null;
+
+		/* Feign exception handling */
+		try {
+			orders = orderServiceClient.getOrders(userId);
+		} catch(FeignException ex) {
+			log.error(ex.getMessage());
+		}
+
+		return orders;
 	}
 
 	private List<ResponseOrder> getOrdersByRestTemplate(String userId) {
