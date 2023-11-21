@@ -18,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.example.userservice.client.OrderServiceClient;
 import com.example.userservice.dto.UserDto;
 import com.example.userservice.jpa.UserEntity;
 import com.example.userservice.jpa.UserRepository;
@@ -31,6 +32,7 @@ public class UserServiceImpl implements UserService {
 	private final UserRepository userRepository;
 	private final BCryptPasswordEncoder passwordEncoder;
 	private final RestTemplate restTemplate;
+	private final OrderServiceClient orderServiceClient;
 	private final Environment env;
 
 	@Override
@@ -73,7 +75,10 @@ public class UserServiceImpl implements UserService {
 		// List<ResponseOrder> orders = new ArrayList<>();
 
 		/* Using as rest template */
-		List<ResponseOrder> orders = getOrdersByRestTemplate(userId);
+		// List<ResponseOrder> orders = getOrdersByRestTemplate(userId);
+
+		/* Using a feign client */
+		List<ResponseOrder> orders = orderServiceClient.getOrders(userId);
 
 		userDto.setOrders(orders);
 
