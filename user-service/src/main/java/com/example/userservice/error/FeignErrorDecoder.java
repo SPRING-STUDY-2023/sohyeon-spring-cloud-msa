@@ -1,0 +1,36 @@
+package com.example.userservice.error;
+
+import org.springframework.core.env.Environment;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
+
+import feign.Response;
+import feign.codec.ErrorDecoder;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+
+@Component
+@RequiredArgsConstructor
+public class FeignErrorDecoder implements ErrorDecoder {
+	private final Environment env;
+
+	@Override
+	public Exception decode(String methodKey, Response response) {
+		switch (response.status()) {
+			case 400 -> {
+			}
+			case 404 -> {
+				if (methodKey.contains("getOrders")) {
+					return new ResponseStatusException(
+						HttpStatus.valueOf(response.status()),
+						env.getProperty("order_service.exception.order_is_empty"));
+				}
+			}
+			default -> {
+				return new Exception(response.reason());
+			}
+		}
+		return null;
+	}
+}

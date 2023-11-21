@@ -80,8 +80,11 @@ public class UserServiceImpl implements UserService {
 		/* Using as rest template */
 		// List<ResponseOrder> orders = getOrdersByRestTemplate(userId);
 
-		/* Using a feign client */
-		List<ResponseOrder> orders = getOrdersByFeignClient(userId);
+		/* Using a feign client with Feign exception handling */
+		// List<ResponseOrder> orders = getOrdersByFeignClient(userId);
+
+		/* Using a feign client with ErrorDecoder */
+		List<ResponseOrder> orders = orderServiceClient.getOrders(userId);
 
 		userDto.setOrders(orders);
 
