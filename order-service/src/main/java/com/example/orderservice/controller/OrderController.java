@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.orderservice.dto.OrderDto;
 import com.example.orderservice.jpa.OrderEntity;
+import com.example.orderservice.message_queue.KafkaProducer;
 import com.example.orderservice.service.OrderService;
 import com.example.orderservice.vo.RequestOrder;
 import com.example.orderservice.vo.ResponseOrder;
@@ -28,6 +29,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/order-service")
 public class OrderController {
 	private final OrderService orderService;
+	private final KafkaProducer kafkaProducer;
 
 	@GetMapping("/health_check")
 	public String status(HttpServletRequest request) {
@@ -39,11 +41,15 @@ public class OrderController {
 		ModelMapper mapper = new ModelMapper();
 		mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
+		/* JPA */
 		OrderDto orderDto = mapper.map(orderDetails, OrderDto.class);
 		orderDto.setUserId(userId);
 		OrderDto createdOrder = orderService.createOrder(orderDto);
 
 		ResponseOrder responseOrder = mapper.map(createdOrder, ResponseOrder.class);
+
+		/* send this order to the kafka */
+		kafkaProducer.send("example-catalog-topic", orderDto);
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(responseOrder);
 	}
