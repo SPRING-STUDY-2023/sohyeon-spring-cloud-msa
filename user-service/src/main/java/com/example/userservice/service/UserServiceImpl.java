@@ -7,6 +7,8 @@ import java.util.UUID;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.cloud.client.circuitbreaker.CircuitBreaker;
+import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
@@ -37,6 +39,7 @@ public class UserServiceImpl implements UserService {
 	private final RestTemplate restTemplate;
 	private final OrderServiceClient orderServiceClient;
 	private final Environment env;
+	private final CircuitBreakerFactory circuitBreakerFactory;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -84,7 +87,10 @@ public class UserServiceImpl implements UserService {
 		// List<ResponseOrder> orders = getOrdersByFeignClient(userId);
 
 		/* Using a feign client with ErrorDecoder */
-		List<ResponseOrder> orders = orderServiceClient.getOrders(userId);
+		// List<ResponseOrder> orders = orderServiceClient.getOrders(userId);
+		CircuitBreaker circuitbreaker = circuitBreakerFactory.create("circuitbreaker");
+		List<ResponseOrder> orders = circuitbreaker.run(() -> orderServiceClient.getOrders(userId),
+			throwable -> new ArrayList<>());
 
 		userDto.setOrders(orders);
 
@@ -97,7 +103,7 @@ public class UserServiceImpl implements UserService {
 		/* Feign exception handling */
 		try {
 			orders = orderServiceClient.getOrders(userId);
-		} catch(FeignException ex) {
+		} catch (FeignException ex) {
 			log.error(ex.getMessage());
 		}
 
