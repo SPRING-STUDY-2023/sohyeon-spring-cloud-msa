@@ -25,7 +25,9 @@ import com.example.orderservice.vo.ResponseOrder;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/order-service")
@@ -41,6 +43,8 @@ public class OrderController {
 
 	@PostMapping("/{userId}/orders")
 	public ResponseEntity<ResponseOrder> createOrder(@PathVariable String userId, @RequestBody RequestOrder orderDetails) {
+		log.info("Before add orders data");
+
 		ModelMapper mapper = new ModelMapper();
 		mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
@@ -61,15 +65,21 @@ public class OrderController {
 
 		ResponseOrder responseOrder = mapper.map(orderDto, ResponseOrder.class);
 
+		log.info("After add orders data");
+
 		return ResponseEntity.status(HttpStatus.CREATED).body(responseOrder);
 	}
 
 	@GetMapping("/{userId}/orders")
 	public ResponseEntity<List<ResponseOrder>> getOrders(@PathVariable String userId) {
+		log.info("Before retrieve orders data");
+
 		Iterable<OrderEntity> orderList = orderService.getOrdersByUserId(userId);
 
 		List<ResponseOrder> result = new ArrayList<>();
 		orderList.forEach(o -> result.add(new ModelMapper().map(o, ResponseOrder.class)));
+
+		log.info("Add retrieved orders data");
 
 		return ResponseEntity.ok(result);
 	}
