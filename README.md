@@ -16,3 +16,4 @@ Spring Cloud로 개발하는 마이크로서비스 애플리케이션(MSA) 강�
 |23.11.09|Spring Cloud Bus, 설정 정보의 암호화 처리|[10주차 학습 정리](https://energetic-mimosa-b8e.notion.site/MSA-10-59533b557b464e9084dc9afbb9b208c6?pvs=4)|
 |23.11.21|Microservice 간 통신|[11주차 학습 정리](https://energetic-mimosa-b8e.notion.site/MSA-11-aeb5d3e3dc684221853e494b6c78d473?pvs=4)|
 |23.11.28|데이터 동기화를 위한 Apache Kafka의 활용 ①|[12~13주차 학습 정리](https://energetic-mimosa-b8e.notion.site/MSA-12-17b0a238d52d405aa71c0572630c3092?pvs=4)|
+|23.12.19|데이터 동기화를 위한 Apache Kafka의 활용 ②|[14~15주차 학습 정리](https://energetic-mimosa-b8e.notion.site/MSA-14-15-adeb63aadd9a49e0aa2fe216d92aa5d5?pvs=4)|

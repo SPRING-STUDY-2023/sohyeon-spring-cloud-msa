@@ -33,4 +33,8 @@ public class CatalogEntity implements Serializable {
 	@Column(nullable = false, updatable = false, insertable = false)
 	@ColumnDefault(value = "CURRENT_TIMESTAMP")
 	private Date createdAt;
+
+	public void decreaseStock(int qty) {
+		this.stock -= qty;
+	}
 }
