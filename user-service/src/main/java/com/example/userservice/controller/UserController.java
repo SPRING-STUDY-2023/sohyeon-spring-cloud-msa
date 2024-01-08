@@ -22,6 +22,7 @@ import com.example.userservice.vo.Greeting;
 import com.example.userservice.vo.RequestUser;
 import com.example.userservice.vo.ResponseUser;
 
+import io.micrometer.core.annotation.Timed;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
@@ -34,6 +35,7 @@ public class UserController {
 	private final Environment env;
 
 	@GetMapping("/health_check")
+	@Timed(value = "users.status", longTask = true)
 	public String status() {
 		return "It's working in User Service"
 			+ "\nport(local.server.port)=" + env.getProperty("local.server.port")
@@ -43,6 +45,7 @@ public class UserController {
 	}
 
 	@GetMapping("/welcome")
+	@Timed(value = "users.welcome", longTask = true)
 	public String welcome() {
 		return greeting.getMessage();
 	}
