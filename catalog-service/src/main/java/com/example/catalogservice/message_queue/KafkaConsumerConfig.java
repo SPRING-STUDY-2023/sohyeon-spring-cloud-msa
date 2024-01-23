@@ -19,7 +19,7 @@ public class KafkaConsumerConfig {
 	@Bean
 	public ConsumerFactory<String, String> consumerFactory() { // 접속 정보
 		Map<String, Object> properties = new HashMap<>();
-		properties.put(BOOTSTRAP_SERVERS_CONFIG, "localhost:9092"); // kafka server
+		properties.put(BOOTSTRAP_SERVERS_CONFIG, "172.18.0.101:9092"); // kafka server
 		properties.put(GROUP_ID_CONFIG, "consumerGroupId"); // consumer group id
 		properties.put(KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 		properties.put(VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
