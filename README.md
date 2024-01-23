@@ -20,3 +20,4 @@ Spring Cloud로 개발하는 마이크로서비스 애플리케이션(MSA) 강�
 |23.12.30|장애 처리와 Microservie 분산 추적|[16주차 학습 정리](https://energetic-mimosa-b8e.notion.site/MSA-16-90f85be7745e4c6cafb677440bd8cc95?pvs=4)|
 |24.01.02|Microservice 모니터링|[17주차 학습 정리](https://energetic-mimosa-b8e.notion.site/MSA-17-4fe41291445c4f088c35e918b759dc22?pvs=4)|
 |24.01.08|애플리케이션 배포를 위한 컨테이너 가상화|[18주차 학습 정리](https://energetic-mimosa-b8e.notion.site/MSA-18-6a7cc11a042d4da2a21a94123f005c2b?pvs=4)|
+|24.01.23|애플리케이션 배포 - Docker Container, Appendix: Microservice Architecture 패턴|[19~20주차 학습 정리](https://energetic-mimosa-b8e.notion.site/MSA-19-20-1f2cd306071c4a55b2dfd98697fac505?pvs=4)|
