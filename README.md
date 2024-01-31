@@ -6,7 +6,7 @@ Spring Cloud로 개발하는 마이크로서비스 애플리케이션(MSA) 강�
 ### 학습 정리
 |날짜|주제|링크|
 |------|---|---|
-|23.09.13|Microservice와 Spring Cloud 소개|[1주차 학습 정리](https://energetic-mimosa-b8e.notion.site/1-6ea81530df154f2a8fe259dfb590d62a?pvs=4)|
+|23.09.13|Microservice와 Spring Cloud 소개|[1주차 학습 정리](https://github.com/SPRING-STUDY-2023/sohyeon-spring-cloud-msa/blob/main/documentation/Microservice%E1%84%8B%E1%85%AA%20Spring%20Cloud%20%E1%84%89%E1%85%A9%E1%84%80%E1%85%A2%20(%E1%84%92%E1%85%A1%E1%86%A8%E1%84%89%E1%85%B3%E1%86%B8%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%85%E1%85%B5).pdf)|
 |23.09.20|Service Discovery|[2주차 학습 정리](https://energetic-mimosa-b8e.notion.site/2-17fbe6c29c7c41fb83a36be60a167bb6?pvs=4)|
 |23.09.25|API Gateway Service, E-commerce 애플리케이션|[3~4주차 학습 정리](https://energetic-mimosa-b8e.notion.site/3-4-90b046c2f1be49aeb03bda9419e151e9?pvs=4)|
 |23.10.06|Users Microservice(1)|[5주차 학습 정리](https://energetic-mimosa-b8e.notion.site/5-422a046d823c42f5a11233573e6c2046?pvs=4)|
